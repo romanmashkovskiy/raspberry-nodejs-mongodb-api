@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "01b8a006-c502-4624-8a2d-5fe3d06af295",
+		"name": "promotion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"user3\",\n  \"email\": \"user3@gmail.com\",\n  \"password\": \"asdfasdf\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/register",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aef6a97b-1e58-4ea9-b384-28aa70eb4f23",
+								"exec": [
+									"const { token } = pm.response.json();",
+									"",
+									"pm.environment.set('TOKEN', token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user1@gmail.com\",\n  \"password\": \"asdfasdf\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Auth User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/me",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email confirm",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": \"dea7\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/email-confirm",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"email-confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"user3@gmail.com\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/password-reset",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"password-reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password restore",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": \"av95\",\n\t\"email\": \"user3@gmail.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/password-restore",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"password-restore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send confirm email code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/send-confirm-code",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"send-confirm-code"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/products",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My products list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/my-products",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"my-products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"product\",\n  \"description\": \"description\",\n  \"pictures\": []\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/my-products",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"my-products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/products/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5d7bddc0264eef3de9b41cc2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"deletedPictures\": [],\n\t\"description\": \"nice phone13\",\n\t\"pictures\": [],\n\t\"title\": \"Phone13\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/my-products/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"my-products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5d7bddc0264eef3de9b41cc2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/my-products/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"my-products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5d7bddc0264eef3de9b41cc2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add product review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rating\": 4,\n\t\"text\": \"nice product\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/products/:id/add-review",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"products",
+								":id",
+								"add-review"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5d6176a5d0145f48ac2777da"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

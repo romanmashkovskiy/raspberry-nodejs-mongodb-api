@@ -1,0 +1,39 @@
+Arguments: 
+  /home/roman/.nvm/versions/node/v10.13.0/bin/node /usr/share/yarn/bin/yarn.js add babel-cli babel-polyfill babel-preset-env babel-preset-stage-0 concurrently cross-env express mysql2 nodemon sequelize
+
+PATH: 
+  /home/roman/.nvm/versions/node/v10.13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  10.13.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/roman/projects/promotion/nodejs-mysql-rest-api/package.json: Unexpected token } in JSON at position 173
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1631:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:304:30)
+      at /usr/share/yarn/lib/cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "api",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "dev": "concurrently \"cross-env PORT=4001 nodemon ./src/server.js --exec babel-node\""
+    },
+  
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
